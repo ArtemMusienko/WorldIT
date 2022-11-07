@@ -1,0 +1,56 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<div class="about">
+    <div class="about__body">
+        <div class="about__header">
+    {% if messages %}
+
+    {% for message in messages %}
+
+        {% if message.tags == 'error' %}
+<center>
+    <div class="alert alert-danger" role="alert">
+        {{ message }}
+    </div>
+</center>
+        {% else %}
+<center>
+   <div class="alert alert-{{ message.tags }}" role="alert">
+        {{ message }}
+    </div>
+</center>
+        {% endif %}
+
+    {% endfor %}
+
+    {% endif %}
+
+            <div class="abouttitle">Регистрация</div>
+       </div>
+    </div>
+        </div>
+<div class="container">
+<div class="center">
+    <h2>Введите свои данные:</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <br>
+            <center>
+            <button class="cnopka" title="Заполните поля регистрацией" type="submit">Зарегистрироваться</button>
+            </center>
+            <br>
+            <div class="text-center p-t-12">
+						<a class="txt2" href="{% url 'login' %}">
+							Есть аккаунт?
+						</a>
+					</div>
+        </form>
+    </div>
+</div>
+<br>
+<br>
+{% endblock %}

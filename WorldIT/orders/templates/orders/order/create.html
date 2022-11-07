@@ -1,0 +1,63 @@
+{% extends "main/layout.html" %}
+ 
+{% block title %}
+    Оформление заказа | WorldIT
+{% endblock %}
+ 
+{% block content %}
+{% if request.user.is_authenticated %}
+<br><br><br><br>
+        <div class="container container__style">
+    <div class="row">
+    <div class="col text-left" id="sidebar">
+        <h1 class="text-center">Ваш составленный заказ:</h1>
+        <br>
+        <ul>
+            {% for item in cart %}
+                <li>
+                    {{ item.quantity }} шт. {{ item.product.name }}
+                    <span>- {{ item.total_price }} руб.</span>
+                </li>
+            {% endfor %}
+        </ul>
+        <b><p class="text-center">К оплате: {{ cart.get_total_price }} руб.</p></b>
+</div>
+        </div>
+    </div>
+</div>
+    <form action="." method="post" class="order-form">
+        {{ form.as_p }}
+        <p><input class="btn btn-success" type="submit" value="Оформить заказ"></p>
+        {% csrf_token %}
+    </form>
+{% else %}
+<section class="fdb-block">
+    <center>
+    <div class="about__body">
+      <div class="alert alert-danger">
+   Для начала Вам нужно войти в аккаунт!
+</div>
+    </div>
+        </center>
+ <div class="otstyp">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col col-md-8 text-center">
+
+            <center>
+            <div class="arrow-down">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+                <br>
+                <br>
+                <a href="{% url 'login' %}"><button class="cnopka" title="Нажмите для просмотра">Войти</button></a>
+            </center>
+        </div>
+      </div>
+    </div>
+        </div>
+ </section>
+{% endif %}
+{% endblock %}

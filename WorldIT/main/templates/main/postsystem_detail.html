@@ -1,0 +1,101 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Ваш отзыв | WorldIT{% endblock %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+{% else %}
+<!-- Модальное Окно  -->
+<div id="overlay">
+    <div class="popup">
+         <div class="modal-header">
+          <h4 class="modal-title">Зарегистрируйтесь и войдите в аккаунт</h4>
+          <button type="button" class="close" data-dismiss="modal" onclick="document.getElementById('overlay').style.display='none';">×</button>
+        </div>
+       <div class="modal-body">
+           <h2 class="text-center_modal">Преимущества:</h2>
+           <br>
+           <ul class="qw">
+                <li><b>1.</b> Возможность осуществлять покупки.</li>
+                <li><b>2.</b> Возможность связаться с нами через форму.</li>
+                <li><b>3.</b> Возможность сделать свой собственный программный продукт, заказав его у нас.</li>
+                <li><b>4.</b> Отсутствие рекламы и всплывающих окон.</li>
+                <li><b>5.</b> Дополнительная информация в профиле пользователя.</li>
+                <li><b>6.</b> Возможность оставлять отзывы.</li>
+            </ul>
+           <center>
+               <a href="{% url 'login' %}"><button class="cnopka" title="Заполните поля перед входом">Войти</button></a>
+           </center>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% if object.author == user %}
+<br>
+<br>
+<br>
+<br>
+<center>
+<h1 class="about__teextt">Ваш отзыв, {{ user.username }}!</h1>
+    </center>
+<br>
+<div class="container">
+    <div class="center">
+        <div class="text-center">
+            <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+    <div class="profile-p">
+         <a class="comm" href="{% url 'profile' %}">{{ object.author }}</a>
+         <small class="text-muted">{{ object.date_posted|date:"d F, Y" }}</small>
+        <h2>{{ object.title }}</h2>
+        <p>{{ object.content }}</p>
+    </div>
+            <a href="{% url 'post-update' object.id %}"><button class="btn btn-primary" style="margin: 20px" title="Заполните поля перед входом">Изменить</button></a>
+            <a href="{% url 'post-delete' object.id %}"><button class="btn btn-danger" style="margin: 20px" title="Заполните поля перед входом">Удалить</button></a>
+            <br>
+            <br>
+            <div class="text-center">
+						<a class="txt2" href="{% url 'comments' %}">
+							Вернуться
+						</a>
+					</div>
+        </div>
+        </div>
+</div>
+<br>
+{% else %}
+<section class="fdb-block">
+    <center>
+    <div class="about__body">
+      <div class="alert alert-danger">
+   Это не Ваш отзыв!
+</div>
+    </div>
+        </center>
+ <div class="otstyp">
+    <div class="container">
+        <center><img class="rounded-circle" src="/static/main/img/error.png" width="250px"></center>
+      <div class="row justify-content-center">
+        <div class="col col-md-8 text-center">
+
+            <center>
+            <div class="arrow-down">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+                <br>
+                <br>
+                <a href="{% url 'comments' %}"><button class="cnopka" title="Нажмите для просмотра">Назад</button></a>
+            </center>
+        </div>
+      </div>
+    </div>
+        </div>
+ </section>
+{% endif %}
+<script type="text/javascript">
+        var delay_popup = 4000;
+        setTimeout("document.getElementById('overlay').style.display='block'", delay_popup);
+</script>
+
+{% endblock %}

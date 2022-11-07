@@ -1,0 +1,16 @@
+#header{
+    background: #4169E1;
+    color: white;
+}
+.module caption{
+    background: #4169E1;
+}
+#branding h1 a:visited{
+    color: white;
+}
+#header a:hover{
+    color: white;
+}
+#header strong{
+    color: #FF8C00;
+}

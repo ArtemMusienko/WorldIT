@@ -1,0 +1,129 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}1C | WorldIT{% endblock %}
+
+{% block content %}
+
+<div class="about">
+    <div class="about__body">
+        <div class="about__header">
+            <div class="abouttitle">1С</div>
+       </div>
+    </div>
+        </div>
+
+{% if request.user.is_authenticated %}
+{% else %}
+<!-- Модальное Окно  -->
+<div id="overlay">
+    <div class="popup">
+         <div class="modal-header">
+          <h4 class="modal-title">Зарегистрируйтесь и войдите в аккаунт</h4>
+          <button type="button" class="close" data-dismiss="modal" onclick="document.getElementById('overlay').style.display='none';">×</button>
+        </div>
+       <div class="modal-body">
+           <h2 class="text-center_modal">Преимущества:</h2>
+           <br>
+           <ul class="qw">
+                <li><b>1.</b> Возможность осуществлять покупки.</li>
+                <li><b>2.</b> Возможность связаться с нами через форму.</li>
+                <li><b>3.</b> Возможность сделать свой собственный программный продукт, заказав его у нас.</li>
+                <li><b>4.</b> Отсутствие рекламы и всплывающих окон.</li>
+                <li><b>5.</b> Дополнительная информация в профиле пользователя.</li>
+               <li><b>6.</b> Возможность оставлять отзывы.</li>
+            </ul>
+           <center>
+               <a href="{% url 'login' %}"><button class="cnopka" title="Заполните поля перед входом">Войти</button></a>
+           </center>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<section class="fdb-block" style="background-image: url(static/main/img/bg_0.svg)">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8 text-center">
+          <div class="fdb-box">
+            <h1>Не разобрались с этим разделом?</h1>
+            <p class="text-h3">
+              Если вам не понятна суть <b>1С конфигураций</b>, то тогда предлагаем Вам перейти в раздел ознакомления с ними
+            </p>
+              <center>
+              <div class="arrow-down">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+                  </center>
+              <br>
+            <p class="mt-4">
+                <a href="{% url 'oneC' %}"><button  class="cnopka" title="Нажмите для просмотра" type="button">Перейти к разделу 1С</button></a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+<br>
+<center>
+<h1 class="about__teextt">Наша продукция</h1>
+    </center>
+ <form class="d-flex" role="search" action="{% url 'plOnec' %}">
+        <input class="form-control me-2" type="search" placeholder="Введите название продукции" aria-label="Search" name="OneC">
+        <button class="btn btn-outline-success" title="Нажмите для поиска" type="submit">Поиск</button>
+      </form>
+{% for el in venues %}
+<div class="vakansii">
+          <div class="box-icon">
+    <div class="container">
+        <div class="row">
+                <div class="icon-box">
+          <h2 class="maximummm">{{ el.title }}</h2>
+            <br>
+          <center>
+            <p align="justify" class="maximum">{{ el.anons }}</p>
+              <br>
+            <a class="about__teextt" href="{% url 'details_oneC' el.id %}">Подробнее</a>
+             <p class="lead"><strong>Стоимость - <b>{{ el.price }}₽</b></strong></p>
+              <br>
+           {% if request.user.is_authenticated %}
+          <button class="btn btn-primary" title="Нажмите для покупки" type="submit">Купить</button>
+            {% else %}
+            <button class="btn btn-primary" type="button"data-toggle="popover" title="Подсказка" data-content="Для начала нужно войти в свой аккаунт">Купить</a></button>
+            {% endif %}
+              </center>
+      </div>
+        </div>
+</div>
+    </div>
+          </div>
+      </div>
+
+{% endfor %}
+<br>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+{% if venues.has_previous %}
+
+<li class="page-item"><a class="page-link" href="?page=1">&laquo 1</a></li>
+<li class="page-item"><a class="page-link" href="?page={{ venues.previous_page_number }}">Предыдущая</a></li>
+
+{% endif %}
+
+
+{% if venues.has_next %}
+
+<li class="page-item"><a class="page-link" href="?page={{ venues.next_page_number }}">Следующая</a></li>
+<li class="page-item"><a class="page-link" href="?page={{ venues.paginator.num_pages }}">Последняя &raquo</a></li>
+
+{% endif %}
+   </ul>
+     </nav>
+
+<script type="text/javascript">
+        var delay_popup = 4000;
+        setTimeout("document.getElementById('overlay').style.display='block'", delay_popup);
+</script>
+{% endblock %}

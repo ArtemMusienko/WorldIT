@@ -1,0 +1,69 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Каталог программной продукции | WorldIT{% endif %}
+{% endblock %}
+
+{% block content %}
+<br><br><br><br>
+<div class="container">
+    <div class="row">
+    <div class="col text-left" id="sidebar">
+        <h1 class="text-center">Категории</h1>
+        <br>
+        <ul class="katalogi">
+            <li class="katalogi py-2" {% if not category %}class="selected"{% endif %}>
+                <a class="btn-primary__style btn btn-primary" href="{% url "shop:product_list" %}">Все</a>
+            </li>
+            {% for c in categories %}
+                <li class="katalogi py-2"{% if category.slug == c.slug %}class="selected"{% endif %}>
+                    <a class="btn-primary__style btn btn-primary" href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="main" class="col text-left">
+        <h1 class="text-center">{% if category %}{{ category.name }}{% else %}
+            Программные продукции{% endif %}</h1>
+         <form class="d-flex" role="search" action="{% url "shop:product_list" %}">
+        <input class="form-control me-2" type="search" placeholder="Введите название продукции" aria-label="Search" name="Product">
+        <button class="btn btn-outline-success" title="Нажмите для поиска" type="submit">Поиск</button>
+      </form>
+        {% for product in products %}
+            <div class="item container__style__product py-5">
+                <a href="{{ product.get_absolute_url }}">
+                    <!-- <img src="
+                            {% if product.image %}{{ product.image.url }}{% else %}{% static "shop/img/no_image.png" %}{% endif %}"> -->
+
+
+                </a>
+                <br>
+                <a style="text-shadow: 1px 1px 2px white, 0 0 1em white, 0 0 0.2em black; font-size: 25px;" class="text-black"><b>{{ product.name }}</b></a><br>
+                <br>
+                <a class="btn btn-success" href="{{ product.get_absolute_url }}"><b>Подробнее</b></a><br>
+               <b><p class="text-black text-center">Цена: {{ product.price }} руб.</p></b>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+{% if venues.has_previous %}
+
+<li class="page-item"><a class="page-link" href="?page=1">&laquo 1</a></li>
+<li class="page-item"><a class="page-link" href="?page={{ venues.previous_page_number }}">Предыдущая</a></li>
+
+{% endif %}
+
+
+{% if venues.has_next %}
+
+<li class="page-item"><a class="page-link" href="?page={{ venues.next_page_number }}">Следующая</a></li>
+<li class="page-item"><a class="page-link" href="?page={{ venues.paginator.num_pages }}">Последняя &raquo</a></li>
+
+{% endif %}
+   </ul>
+     </nav>
+{% endblock %}

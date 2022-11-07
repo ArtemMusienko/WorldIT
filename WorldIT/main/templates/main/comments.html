@@ -1,0 +1,81 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Отзывы | WorldIT{% endblock %}
+
+{% block content %}
+<div class="about">
+    <div class="about__body">
+        <div class="about__header">
+            <div class="abouttitle">Отзывы</div>
+       </div>
+    </div>
+        </div>
+<div class="content">
+    <div class="content__container">
+        На этой странице хранятся все отзывы наших зарегистрированных пользователей. Для нас очень важно Ваше мнение, поэтому ждем именно Ваш отзыв.
+        Добавление отзыва займет у Вас не больше минуты.
+        <br>
+        <br>
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'post-create' %}"><button class="cnopka">Оставить отзыв</button></a>
+        {% else %}
+        <button class="cnopka" type="button"data-toggle="popover" title="Подсказка" data-content="Для начала нужно войти в свой аккаунт">Оставить отзыв</a></button>
+         {% endif %}
+</div>
+ </div>
+{% if request.user.is_authenticated %}
+{% else %}
+<!-- Модальное Окно  -->
+<div id="overlay">
+    <div class="popup">
+         <div class="modal-header">
+          <h4 class="modal-title">Зарегистрируйтесь и войдите в аккаунт</h4>
+          <button type="button" class="close" data-dismiss="modal" onclick="document.getElementById('overlay').style.display='none';">×</button>
+        </div>
+       <div class="modal-body">
+           <h2 class="text-center_modal">Преимущества:</h2>
+           <br>
+           <ul class="qw">
+                <li><b>1.</b> Возможность осуществлять покупки.</li>
+                <li><b>2.</b> Возможность связаться с нами через форму.</li>
+                <li><b>3.</b> Возможность сделать свой собственный программный продукт, заказав его у нас.</li>
+                <li><b>4.</b> Отсутствие рекламы и всплывающих окон.</li>
+                <li><b>5.</b> Дополнительная информация в профиле пользователя.</li>
+                <li><b>6.</b> Возможность оставлять отзывы.</li>
+            </ul>
+           <center>
+               <a href="{% url 'login' %}"><button class="cnopka" title="Заполните поля перед входом">Войти</button></a>
+           </center>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+    {% for post_system in posts %}
+  <div class="vakansii">
+          <div class="box-icon">
+    <div class="container">
+        <div class="row">
+                <div class="icon-boxxx">
+                    <center>
+                <img class="rounded-circle article-img" src="{{ post_system.author.profile.image.url }}">
+                        <div class="rasstoyanie">
+    <a>{{ post_system.author }}</a>
+                            </div>
+    <small class="text-muted">{{ post_system.date_posted|date:"d F, Y" }}</small>
+    <h2><a class="article-title" href="{% url 'post-detail' post_system.id %}">{{ post_system.title }}</a></h2>
+    <p class="article-content">{{ post_system.content }}</p>
+                        </center>
+        </div>
+</div>
+    </div>
+          </div>
+      </div>
+    {% endfor %}
+
+<script type="text/javascript">
+        var delay_popup = 4000;
+        setTimeout("document.getElementById('overlay').style.display='block'", delay_popup);
+</script>
+
+{% endblock %}

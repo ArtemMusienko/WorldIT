@@ -1,0 +1,89 @@
+{% extends 'main/layout.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Профиль | WorldIT{% endblock %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+ <div class="about__body">
+        <div class="about__header">
+            <div class="abouttitle">Ваш профиль</div>
+       </div>
+    </div>
+<div class="container">
+    <div class="center">
+        <div class="text-center">
+            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+    <div class="profile-p">
+        <p>Ваше имя пользователя - <b>{{ user }}</b></p>
+        <p>Ваш e-mail - <b>{{ user.email }}</b></p>
+        <p>Ваш имя - <b>{{ user.first_name }}</b></p>
+        <p>Ваш фамилия - <b>{{ user.last_name }}</b></p>
+       <!-- <p>Последний вход - <b>{{ user.last_login }}</b></p> -->
+    </div>
+             <a href="{% url 'profile_edit' %}"><button style="margin: 20px" class="cnopka">Изменить профиль</button></a>
+            {% if request.user.is_authenticated and request.user.is_staff %}
+              <a href="/admin"><button class="cnopka" title="Нажмите для просмотра">Админ панель</button></a>
+            {% endif %}
+              <a href="{% url 'change_password' %}"><button style="margin: 20px" class="cnopka">Изменить пароль</button></a>
+            <br>
+            <br>
+        </div>
+        </div>
+</div>
+<br>
+<section class="fdb-block">
+  <div class="container">
+<div class="center-info">
+      <div class="vakansii-profile">
+          <h3 class="text-center" style="text-shadow: 1px 1px 2px white, 0 0 1em white, 0 0 0.2em black;">Пользовательская информация</h3>
+            <br>
+            <p class="text-left">Если вы купили нашу продукцию, то в случае, если вам необходима корректировка продукции или поддержка с инструкцией, вы можете написать нам на почту,
+            обязательно указав вашу почту, на которой зарегистрирован аккаунт в WorldIT, и ваше имя пользователя</p>
+            <br>
+            <p class="text-left">Для наших пользователей имеется уникальная возможность заказать свою программную продукции под свои предпочтения и получить годовую возможность поддержки от нашей команды программистов.
+            Вам необходимо перейти на главную страницу нашего сайта и заполнить простую форму, которую мы обязательно рассмотрим и ответим в ближайшее время</p>
+          <br>
+     <center>
+        <img alt="image" class="maximumIMG" src="/static/main/img/apple.svg">
+              <br>
+              <br>
+        <h3>WorldIT</h3>
+          </center>
+            </div>
+    </div>
+</div>
+</section>
+{% else %}
+<section class="fdb-block">
+    <center>
+    <div class="about__body">
+      <div class="alert alert-danger">
+    Вы не можете зайти в профиль, так как не находитесь в аккаунте!
+</div>
+    </div>
+        </center>
+ <div class="otstyp">
+    <div class="container">
+        <center><img class="rounded-circle" src="/static/main/img/error.png" width="250px"></center>
+      <div class="row justify-content-center">
+        <div class="col col-md-8 text-center">
+
+            <center>
+            <div class="arrow-down">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+                <br>
+                <br>
+                <a href="/"><button class="cnopka" title="Нажмите для просмотра">Главная</button></a>
+            </center>
+        </div>
+      </div>
+    </div>
+        </div>
+ </section>
+{% endif %}
+
+{% endblock %}

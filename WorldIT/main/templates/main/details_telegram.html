@@ -1,0 +1,43 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}{{ telegram.title }} | WorldIT{% endblock %}
+
+{% block content %}
+
+         <div class="titulnii">{{ telegram.title }}</div>
+<section class="fdb-block">
+  <div class="container">
+      <div class="vakansii">
+          <h3 class="text-center">Описание</h3>
+            <br>
+            <p class="text-left">{{ telegram.anons }}</p>
+            <br>
+            <p class="text-left">{{ telegram.full_text }}</p>
+            <br>
+          <center>
+             <p class="lead"><strong>Стоимость - <b>{{ telegram.price }}₽</b></strong></p>
+              </center>
+        </div>
+      <div class="vakansii">
+          <center>
+        <img alt="image" class="maximumIMG" src="/static/main/img/telegramC.png">
+              <br>
+              <br>
+        <h3>Telegram бот</h3>
+        <p class="text-center">Этот продукт является лицензированным и сделанным в полном объеме. Если при использовании у Вас появятся ошибки, то просим Вас написать нам, заполнив форму обратной связи или же позвонить по телефону</p>
+        <a href="/"><button class="cnopka">Главная</button></a>
+              </center>
+      </div>
+    </div>
+  </div>
+     <div class="text-center">
+						<a class="txt2" href="{% url 'plDiscord' %}">
+							Вернуться
+						</a>
+					</div>
+      </div>
+  </div>
+</section>
+
+
+{% endblock %}

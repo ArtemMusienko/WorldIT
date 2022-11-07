@@ -1,0 +1,69 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}{{ artile.title }}{% endblock %}
+
+{% block content %}
+<br>
+<br>
+<div class="detail">
+<div class="container">
+      <div class="row justify-content-center">
+        <div class="col col-md-8 text-center">
+    <h3>{{ artile.title }}</h3>
+
+
+        <p>{{ artile.date }}</p>
+
+        <p class="qw">{{ artile.full_text }}</p>
+        {% if request.user.is_authenticated and request.user.is_staff %}
+            <br>
+       <a href="{% url 'news-delete' artile.id %}"><button style="margin: 20px" class="cnopka">Удалить</button></a>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+             <button  class="cnopka" title="Нажмите для просмотра" type="button" data-toggle="modal" data-target="#myModal">Откликнуться</button>
+                 <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Понравилась данная вакансия?</h4>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+           <ul class="qw">
+                <li>Напишите нам на почту - <b>temich2001@yandex.ru</b></li>
+                <li>Или же обратитесь по телефону - <b>+79888955286</b></li>
+                <li>При обращении кратко рассказать о себе, о профессиональном образовании и почему именно вы</li>
+            </ul>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+            {% endif %}
+            {% if request.user.is_authenticated and request.user.is_staff %}
+         <a href="{% url 'news-update' artile.id %}"><button style="margin: 20px" class="cnopka">Изменить</button></a>
+
+        {% endif %}
+                        <br>
+            <br>
+                     <div class="text-center">
+						<a class="txt2" href="{% url 'news_home' %}">
+							Вернуться
+						</a>
+					</div>
+</div>
+</div>
+      </div>
+</div>
+    </div>
+{% endblock %}

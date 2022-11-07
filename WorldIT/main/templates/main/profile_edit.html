@@ -1,0 +1,39 @@
+{% extends 'main/layout.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Профиль | WorldIT{% endblock %}
+{% block content %}
+{% if request.user.is_authenticated %}
+
+<div class="about__body">
+        <div class="about__header">
+            <div class="abouttitle">Изменение данных</div>
+       </div>
+    </div>
+<div class="container">
+<div class="center">
+    <div class="itemss__labell">Введите новые данные:</div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ u_form|crispy }}
+            {{ p_form|crispy }}
+            <br>
+            <center>
+             <button class="cnopka" type="submit">Изменить</button>
+                </center>
+        </form>
+    <br>
+         <div class="text-center">
+						<a class="txt2" href="{% url 'profile' %}">
+							Вернуться
+						</a>
+					</div>
+</div>
+<br>
+<br>
+{% else %}
+
+<p>Войдите, чтобы посмотреть свои данные!</p>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,174 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link type="image/x-icon" href="/static/main/img/favicon.ico" rel="shortcut icon">
+    <link type="image/x-icon" href="/static/main/img/favicon.ico" rel="icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        $(window).on('load', function(){
+            $('.preloader').delay(370).fadeOut('slow');
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+          $('[data-toggle="popover"]').popover();
+        });
+    </script>
+</head>
+<body>
+    <div class="preloader">
+        <div>
+            <img src="{% static 'main/img/preloader.svg' %}" alt="">
+        </div>
+    </div>
+    <button onclick="topFunction()" id="myBtn" title="Вверх">↑</button>
+<header>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-ligh">
+             <a class="navbar-brand" href="/">
+    <img src="{% static 'main/img/apple.svg' %}" title="Нажмите, чтобы перейти на главную страницу" width="58" height="30" alt=""></a>
+            <a class="navbar-brand" title="Нажмите, чтобы перейти на главную страницу" href="/">WorldIT</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+               <ul class="navbar-nav ml-auto">
+                    <!-- <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>-->
+                    <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Сотрудничество</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'news_home' %}">Это интересно</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">О компании</a></li>
+                   <span class="navbar-text"><a style="text-decoration: none;" href="{% url "cart:cart_detail" %}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></span>
+                  <!-- <li class="nav-item"><a class="nav-link" href="{% url 'create' %}">Добавить новость</a></li>-->
+                   <!-- <li class="nav-item"><a class="nav-link" href="/admin/">AdminPanel</a></li> -->
+                </ul>
+                <span class="navbar-text">
+                    {% if request.user.is_authenticated %}
+                    <a title="Ваш профиль" href="{% url 'profile' %}">{{ user.username }}</a> | <a href="{% url 'logout' %}">Выйти</a>
+                    {% else %}
+                    <a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login' %}">Войти</a>
+                    {% endif %}
+                </span>
+            </div>
+        </nav>
+    </div>
+</header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+<footer class="page-footer font-small mdb-color lighten-3 pt-4">
+  <div class="container text-center text-md-left">
+    <div class="row">
+        <div class="col-md-4 col-lg-3 mr-auto my-md-4 my-0 mt-4 mb-1">
+        <h5 class="font-weight-bold text-uppercase mb-4" align="left">Специализация</h5>
+        <p align="left">Вся наши сотрудники являются сертифицированными и опытными</p>
+        <p align="left">Вся продукция проекта WorldIT выполнена по всем стандартам и является официальной</p>
+        </div>
+        <hr class="clearfix w-100 d-md-none">
+        <div class="col-md-2 col-lg-2 mx-auto my-md-4 my-0 mt-4 mb-1">
+            <h5 class="font-weight-bold text-uppercase mb-4" align="left">О нас</h5>
+            <ul class="list-unstyled">
+          <li>
+            <p align="left">
+              <a href="/">Проекты</a>
+            </p>
+          </li>
+          <li>
+            <p align="left">
+              <a href="/">Сотрудничество</a>
+            </p>
+          </li>
+          <li>
+            <p align="left">
+              <a href="/">Хотите работать с нами?</a>
+            </p>
+          </li>
+          <li>
+            <p align="left">
+              <a href="/">Наши награды и премии</a>
+            </p>
+          </li>
+        </ul>
+      </div>
+      <hr class="clearfix w-100 d-md-none">
+      <div class="col-md-4 col-lg-3 mx-auto my-md-4 my-0 mt-4 mb-1">
+        <h5 class="font-weight-bold text-uppercase mb-4" align="left">Как связаться с нами?</h5>
+        <ul class="list-unstyled">
+          <li>
+            <p align="left">
+              <i class="fas fa-home mr-3"></i> Ростов-на-Дону, ДГТУ, RU</p>
+          </li>
+          <li>
+            <p align="left">
+              <i class="fas fa-envelope mr-3"></i> temich2001@yandex.ru</p>
+          </li>
+          <li>
+            <p align="left">
+              <i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+          </li>
+          <li>
+            <p align="left">
+              <i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+          </li>
+        </ul>
+      </div>
+      <hr class="clearfix w-100 d-md-none">
+      <div class="col-md-2 col-lg-2 text-center mx-auto my-4">
+        <h5 class="font-weight-bold text-uppercase mb-4" align="left">Подписывайтесь:</h5>
+        <a type="button" class="btn-floating btn-fb mx-1" href="/">
+          <i class="fab fa-discord"></i>
+        </a>
+        <a type="button" class="btn-floating btn-tw mx-1" href="/">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a type="button" class="btn-floating btn-gplus mx-1" href="/">
+          <i class="fab fa-vk"></i>
+        </a>
+        <a type="button" class="btn-floating btn-dribbble mx-1" href="/">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+    <hr style="height: 3px;color: #FFFFFF;" align="center", width="1500"/>
+    <div class="container text-center text-md-left">
+    <div class="row">
+      <div class="col-md-4 col-lg-3 mr-auto my-md-4 my-0 mt-4 mb-1">
+        <h5 align="left">© WorldIT, 2022</h5>
+        <p align="left">Мы используем файлы cookie для персонализации сервисов и повышения удобства пользования сайтом. Если вы не согласны на их использование, поменяйте настройки браузера.</p>
+      </div>
+      <hr class="clearfix w-100 d-md-none">
+      <div class="col-md-2 col-lg-2 mx-auto my-md-4 my-0 mt-4 mb-1">
+        <a href="/" align="left">Оферта</a>
+      </div>
+      <hr class="clearfix w-100 d-md-none">
+      <div class="col-md-4 col-lg-3 mx-auto my-md-4 my-0 mt-4 mb-1">
+        <a href="/" align="left">Оплата услуг и ПО</a>
+      </div>
+      <hr class="clearfix w-100 d-md-none">
+      <div class="col-md-4 col-lg-3 mx-auto my-md-4 my-0 mt-4 mb-1">
+       <a href="/" align="left">Правила пользования Платформой</a>
+      </div>
+    </footer>
+
+    <script src="{% static 'main/js/scripts.js' %}"></script>
+
+</body>
+</html>

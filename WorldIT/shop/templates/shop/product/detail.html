@@ -1,0 +1,24 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block title %}
+  {% if category %}{{ category.title }}{% else %}Детальный просмотр | WorldIT{% endif %}
+{% endblock %}
+
+{% block content %}
+<br><br><br><br>
+<div class="container container__style">
+    <div class="product-detail">
+   <!-- <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'shop/img/no_image.png' %}{% endif %}"> -->
+    <h1>{{ product.name }}</h1>
+    <h2><a style="color: blue; text-decoration: none; text-shadow: 1px 1px 2px white, 0 0 1em white, 0 0 0.2em black;" href="{{ product.category.get_absolute_url }}">{{ product.category }} категория</a></h2>
+        <p class="text-black">{{ product.description }}</p>
+    <b><p class="price">{{ product.price }} Руб.</p></b>
+<form action="{% url "cart:cart_add" product.id %}" method="post">
+    {{ cart_product_form }}
+    {% csrf_token %}
+        <button class="btn btn-primary" type="submit">Добавить в корзину</button>
+</form>
+  </div>
+    </div>
+{% endblock %}

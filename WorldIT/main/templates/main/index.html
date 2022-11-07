@@ -1,0 +1,348 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Главная страница | WorldIT{% endblock %}
+
+{% block content %}
+        <div class="about">
+    <div class="about__body">
+        <div class="about__header">
+			 {% if messages %}
+
+    {% for message in messages %}
+
+        {% if message.tags == 'error' %}
+<center>
+    <div class="alert alert-danger" role="alert">
+        {{ message }}
+    </div>
+</center>
+        {% else %}
+<center>
+   <div class="alert alert-{{ message.tags }}" role="alert">
+        {{ message }}
+    </div>
+</center>
+        {% endif %}
+
+    {% endfor %}
+
+    {% endif %}
+            <div class="abouttitle">Главная страница</div>
+              </div>
+    </div>
+                     <div class="content">
+    <div class="content__container">Если Вы уже подробно ознакомлены с предметностью раздела, то предлагаем Вам сразу перейти к просмотру продукции: <!-- <a class="a-discord" href="{% url 'plDiscord' %}">Discord</a>,
+                  <a class="a-vk" href="{% url 'plVk' %}">VK</a>, <a class="a-1c" href="{% url 'plOnec' %}">1C</a>, <a class="a-telegram" href="{% url 'plTelegram' %}">Telegram</a> --> <br><br><a href="{% url "shop:product_list" %}"><button class="cnopka">Посмотреть</button></a></div>
+
+       </div>
+    </div>
+    </div>
+
+<section class="fdb-block">
+    <div class="container">
+      <div class="row text-left">
+        <div class="col-6 col-md-6 col-lg-6 ml-sm-auto">
+          <div class="fdb-box fdb-touch">
+            <div class="row justify-content-center">
+              <div class="col-6 col-xl-6 text-center">
+       <h2>VK мини-приложения</h2>
+                  <p class="text-h3">VK - главная социальная сеть нашего региона, в которой вы сможете руководить одним из ваших мини-приложений. Данный раздел сделан для VK.</p>
+               <a href="{% url 'vk' %}"><button class="cnopka">Посмотреть</button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+           <div class="vakansii">
+          <center>
+        <img alt="image" src="static/main/img/vkS.png" width="300px" height="300px">
+              </center>
+      </div>
+      </div>
+    </div>
+</section>
+
+<section class="fdb-block">
+    <div class="container">
+      <div class="row text-left">
+                 <div class="vakansii">
+          <center>
+        <img alt="image" src="static/main/img/discordS.png" width="250px" height="250px">
+              </center>
+      </div>
+        <div class="col-6 col-md-6 col-lg-6 ml-sm-auto">
+          <div class="fdb-box fdb-touch">
+            <div class="row justify-content-center">
+              <div class="col-6 col-xl-6 text-center">
+               <h2>Discord боты</h2>
+                     <p class="text-h3">Нужен ваш личный администратор чата в Discord? Или может музыкальный бот? Именно для этого и был сделан данный раздел.</p>
+               <a href="{% url 'discord' %}"><button class="cnopka">Посмотреть</button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<section class="fdb-block">
+    <div class="container">
+      <div class="row text-left">
+        <div class="col-6 col-md-6 col-lg-6 ml-sm-auto">
+          <div class="fdb-box fdb-touch">
+            <div class="row justify-content-center">
+              <div class="col-6 col-xl-6 text-center">
+               <h2>1C конфигурации</h2>
+                 <p class="text-h3"> У вас есть свой начинающий бизнес? Тогда вам просто необходимо иметь 1C конфигурацию, которая будет обеспечивать весь ваш бухгалтерский учёт.</p>
+                <a href="{% url 'oneC' %}"><button class="cnopka">Посмотреть</button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="vakansii">
+          <center>
+        <img alt="image" src="static/main/img/1cS.png" width="300px" height="300px">
+              </center>
+      </div>
+      </div>
+    </div>
+</section>
+
+  <section class="fdb-block">
+    <div class="container">
+      <div class="row text-left">
+                 <div class="vakansii">
+          <center>
+        <img alt="image" src="static/main/img/telegramC.png" width="300px" height="300px">
+              </center>
+      </div>
+        <div class="col-6 col-md-6 col-lg-6 ml-sm-auto">
+          <div class="fdb-box fdb-touch">
+            <div class="row justify-content-center">
+              <div class="col-6 col-xl-6 text-center">
+                <h2>Telegram боты</h2>
+                <p class="text-h3">	Telegram - самый популярный мессенджер, которого нельзя представить без Telegram ботов. Именно для них и был создан этот раздел.</p>
+                <a href="{% url 'telegram' %}"><button class="cnopka">Посмотреть</button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!--
+	<div class="wrapperrr">
+			<div class="contenttt">
+<section class="itemss">
+	<hr style="height: 3px;color: #000000;" align="center", width="800"/>
+	<br>
+	<br>
+					<h2 class="itemss__title title"></h2>
+					<div class="itemss__item">
+						<div class="itemss__image">
+							<a title="Войдите перед покупкой" href="{% url 'discord' %}"><img src="static/main/img/discordS.png" alt=""></a>
+						</div>
+						<div class="itemss__body">
+							<div class="itemss__label"><a title="Войдите перед покупкой" href="{% url 'discord' %}">Discord чат-боты</a></div>
+							<div class="itemss__text">
+								Нужен ваш личный администратор чата в Discord? Или может музыкальный бот? Именно для этого и был сделан данный раздел.
+							</div>
+						</div>
+					</div>
+    <br>
+    <hr style="height: 3px;color: #000000;" align="center", width="800"/>
+    <br>
+	<br>
+					<div class="itemss__item">
+						<div class="itemss__body">
+
+							<div class="itemss__label"><a title="Войдите перед покупкой" href="{% url 'vk' %}">VK мини-приложения</a></div>
+							<div class="itemss__text">
+								VK - главная социальная сеть нашего региона, в которой вы сможете руководить одним из ваших мини-приложений. Данный раздел сделан для всех желающих развиваться в VK.
+							</div>
+						</div>
+                        <div class="itemss__image">
+							<a title="Войдите перед покупкой" href="{% url 'vk' %}"><img src="static/main/img/vkS.png" alt=""></a>
+						</div>
+					</div>
+       <br>
+    <hr style="height: 3px;color: #000000;" align="center", width="800"/>
+	<br>
+	<br>
+					<div class="itemss__item">
+						<div class="itemss__image">
+							<a title="Войдите перед покупкой" href="{% url 'oneC' %}"><img src="static/main/img/1cS.png" alt=""></a>
+						</div>
+						<div class="itemss__body">
+							<div class="itemss__label"><a title="Войдите перед покупкой" href="{% url 'oneC' %}">1C конфигурации</a></div>
+							<div class="itemss__text">
+								У вас есть свой начинающий бизнес? Тогда вам просто необходимо иметь 1C конфигурацию, которая будет обеспечивать весь ваш бухгалтерский учёт.
+							</div>
+						</div>
+					</div>
+       <br>
+    <hr style="height: 3px;color: #000000;" align="center", width="800"/>
+    <br>
+	<br>
+    <div class="itemss__item">
+						<div class="itemss__body">
+							<div class="itemss__label"><a title="Войдите перед покупкой" href="{% url 'telegram' %}">Telegram боты</a></div>
+							<div class="itemss__text">
+								Telegram - самый популярный мессенджер, которого нельзя представить без Telegram ботов. Именно для них и был создан этот раздел.
+							</div>
+						</div>
+        <div class="itemss__image">
+							<a title="Войдите перед покупкой" href="{% url 'telegram' %}"><img src="static/main/img/telegramC.png" alt=""></a>
+						</div>
+					</div>
+       <br>
+    <hr style="height: 3px;color: #000000;" align="center", width="800"/>
+    <br>
+	<br>
+				</section>
+</div>
+		</div>
+		-->
+<section class="fdb-block" style="background-image: url(static/main/img/bg_0.svg)">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="fdb-box fdb-touch">
+            <div class="row text-center justify-content-center">
+              <div class="col-12 col-md-9 col-lg-7">
+                <h1>Индивидуальный проект</h1>
+                <p class="text-h3">Вам нужен индивидуальный проект? Заполните эту форму, подробно описав Вашу идею, мы обязательно рассмотрим ее и напишем Вам!</p>
+              </div>
+            </div>
+            <div class="row justify-content-center pt-4">
+              <div class="col-12 col-md-8">
+                <form method="post">
+                    {% csrf_token %}
+                  <div class="row">
+                    <div class="col-12 col-md">
+                      <input type="text" class="field" placeholder="ФИО" name="name">
+                    </div>
+                    <div class="col-12 col-md mt-4 mt-md-0">
+                        <input type="tel" class="field"  placeholder="Номер телефона" name="number">
+                    </div>
+                  </div>
+
+                  <div class="row mt-4">
+                    <div class="col">
+                        <select type="text" title="Нажми на меня" class="field" placeholder="Тема" name="tema">
+                             <option>VK</option>
+                            <option>Discord</option>
+                            <option>Telegram</option>
+                            <option>1C</option>
+                        </select>
+                    </div>
+                  </div>
+
+                  <div class="row mt-4">
+                    <div class="col">
+                      <textarea class="field" name="message" rows="3" placeholder="Описание проекта" name="message"></textarea>
+                    </div>
+                  </div>
+                    <br>
+                    <center>
+                    {{ form.captcha }}
+                        </center>
+                  <div class="row mt-4">
+                    <div class="col text-center">
+                          <center>
+        {% if request.user.is_authenticated %}
+    <button class="cnopka" title="Проверьте все ли заполнено" type="submit">Отправить</button>
+        <br>
+         <br>
+        {% else %}
+<button class="cnopka" type="button"data-toggle="popover" title="Подсказка" data-content="Для начала нужно войти в свой аккаунт">Отправить</a></button>
+        <br>
+        <br>
+    </center>
+    {% endif %}
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!--
+<div class="about__body">
+        <div class="about__header">
+            <div class="abouttitle">Индивидуальный проект</div>
+       </div>
+    </div>
+<form method="post">
+    {% csrf_token %}
+    {{ form.name }}<br>
+    {{ form.tema }}<br>
+    {{ form.number }}<br>
+    {{ form.message }}<br>
+    {{ form.captcha }}<br>
+
+    <center>
+        {% if request.user.is_authenticated %}
+    <button title="Проверьте все ли заполнено" type="submit">Отправить</button>
+        <br>
+         <br>
+        {% else %}
+<button type="button"data-toggle="popover" title="Подсказка" data-content="Для начала нужно войти в свой аккаунт">Отправить</a></button>
+        <br>
+        <br>
+    </center>
+    {% endif %}
+</form>
+
+<section class="fdb-block" style="background-image: url(static/main/img/bg_0.svg)">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="fdb-box fdb-touch">
+            <div class="row text-center justify-content-center">
+              <div class="col-12 col-md-9 col-lg-7">
+                <h1>Contact Us</h1>
+                <p class="text-h3">Pityful a rethoric question ran over her cheek, then she continued her way. On her way she met a copy.</p>
+              </div>
+            </div>
+
+            <div class="row justify-content-center pt-4">
+              <div class="col-12 col-md-8">
+                <form>
+                  <div class="row">
+                    <div class="col-12 col-md">
+                      <input type="text" class="form-control" placeholder="Name">
+                    </div>
+                    <div class="col-12 col-md mt-4 mt-md-0">
+                      <input type="text" class="form-control" placeholder="Email">
+                    </div>
+                  </div>
+
+                  <div class="row mt-4">
+                    <div class="col">
+                      <input type="email" class="form-control"  placeholder="Subject">
+                    </div>
+                  </div>
+
+                  <div class="row mt-4">
+                    <div class="col">
+                      <textarea class="form-control" name="message" rows="3" placeholder="How can we help?"></textarea>
+                    </div>
+                  </div>
+                  <div class="row mt-4">
+                    <div class="col text-center">
+                      <button type="submit" class="btn">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+-->
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+<section class="fdb-block">
+    <center>
+    <div class="about__body">
+      <div class="alert alert-danger">
+   Вы уже находитесь в аккаунте!
+</div>
+    </div>
+        </center>
+ <div class="otstyp">
+    <div class="container">
+        <center><img class="rounded-circle" src="/static/main/img/error.png" width="250px"></center>
+      <div class="row justify-content-center">
+        <div class="col col-md-8 text-center">
+
+            <center>
+            <div class="arrow-down">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+                <br>
+                <br>
+                <a href="/"><button class="cnopka" title="Нажмите для просмотра">Главная</button></a>
+            </center>
+        </div>
+      </div>
+    </div>
+        </div>
+ </section>
+{% else %}
+
+<div class="about">
+    <div class="about__body">
+        <div class="about__header">
+    {% if messages %}
+
+    {% for message in messages %}
+
+        {% if message.tags == 'error' %}
+<center>
+    <div class="alert alert-danger" role="alert">
+        {{ message }}
+    </div>
+</center>
+        {% else %}
+<center>
+   <div class="alert alert-{{ message.tags }}" role="alert">
+        {{ message }}
+    </div>
+</center>
+        {% endif %}
+
+    {% endfor %}
+
+    {% endif %}
+            <div class="abouttitle">Вход</div>
+       </div>
+    </div>
+        </div>
+<div class="container">
+<div class="center">
+    <h2>Введите свои данные:</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <center>
+        <button class="cnopka" title="Заполните поля перед входом" type="submit">Войти</button>
+            </center>
+        <br>
+    </form>
+     <div class="text-center">
+						<span class="txt1">
+							Забыли
+						</span>
+						<a class="txt2" href="{% url 'password_reset' %}">
+							пароль?
+						</a>
+					</div>
+					<div class="text-center">
+						<a class="txt2" href="{% url 'register' %}">
+							Нет аккаунта?
+						</a>
+					</div>
+    </div>
+</div>
+<br>
+<br>
+{% endif %}
+{% endblock %}

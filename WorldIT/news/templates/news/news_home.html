@@ -1,0 +1,46 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Вакансии | WorldIT{% endblock %}
+
+{% block content %}
+            <div class="about">
+    <div class="about__body">
+        <div class="about__header">
+            <div class="abouttitle">Вакансии</div>
+       </div>
+    </div>
+        </div>
+
+        <div class="content">
+    <div class="content__container">
+        <div class="about__text">Здесь вы увидите список вакансий, пополняющийся большим темпом. Будем рады видеть новых квалифицированных и опытных сотрудников в нашей дружной компании
+        </div>
+        </div>
+            </div>
+ <form class="d-flex" role="search" action="{% url 'news_home' %}">
+        <input class="form-control me-2" type="search" placeholder="Введите интересующую вакансию" aria-label="Search" name="search">
+        <button class="btn btn-outline-success" title="Нажмите для поиска" type="submit">Поиск</button>
+      </form>
+        {% if news %}
+        {% for el in news %}
+            <div class="vakanssii">
+                <h3>{{ el.title }}</h3>
+                <p>{{ el.anons }}</p>
+                <a href="{% url 'news-detail' el.id %}"><button class="cnopka">Подробнее</button></a>
+        </div>
+        {% endfor %}
+    {% else %}
+    <div class="content__container">
+        <div class="about__text">Такой вакансии не существует
+        </div>
+            </div>
+    {% endif %}
+
+{% if request.user.is_authenticated and request.user.is_staff %}
+<br>
+<br>
+<center>
+<a href="{% url 'create' %}"><button class="cnopka">Добавить вакансию</button></a>
+    </center>
+{% endif %}
+{% endblock %}

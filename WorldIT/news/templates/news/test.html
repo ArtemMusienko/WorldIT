@@ -1,0 +1,20 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Обратная связь{% endblock %}
+
+{% block content %}
+<div class="about">
+    <div class="about__body">
+        <div class="about__header">
+            <div class="abouttitle">Обратная связь</div>
+       </div>
+    </div>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <center>
+    <button type="submit">Send</button>
+        </center>
+</form>
+
+{% endblock %}

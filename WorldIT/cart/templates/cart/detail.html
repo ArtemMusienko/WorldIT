@@ -1,0 +1,101 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block title %}
+    Корзина | WorldIT
+{% endblock %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+<br><br><br><br>
+<div class="container container__style">
+    <br>
+    <h1>Ваша корзина</h1>
+    <br><br>
+    <table class="table">
+        <thead>
+        <tr class="table-primary">
+           <!-- <th>Image</th> -->
+            <th>Продукт</th>
+            <th>Кол-во</th>
+            <th>Цена за шт</th>
+            <th>Сумма</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in cart %}
+            {% with product=item.product %}
+                <tr class=table-light">
+                       <!-- <td>
+                        <a href="{{ product.get_absolute_url }}">
+                            <img src="
+                                    {% if product.image %}{{ product.image.url }}{% else %}{% static "shop/img/no_image.png" %}{% endif %}">
+                        </a>
+            </td> -->
+                    <td>{{ product.name }}</td>
+                    <td>
+  <!--  <form action="{% url "cart:cart_add" product.id %}"
+          method="post">
+        {{ item.update_quantity_form.quantity }}
+        {{ item.update_quantity_form.update }}
+                        <button class="btn btn-primary" type="submit">Изменить</button>
+        {% csrf_token %}
+    </form>
+    -->
+                        {{ item.quantity }}
+</td>
+
+
+                    <td class="num">{{ item.price }} руб.</td>
+                    <td class="num">{{ item.total_price }} руб.</td>
+                      <td>
+                       <a class="btn__link" href="{% url "cart:cart_remove" product.id %}"> <i class="fa fa-times-circle"></i></a>
+                    </td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+        <tr class="table-primary">
+            <td>Общая сумма корзины</td>
+            <td colspan="2"></td>
+            <td class="num">{{ cart.get_total_price }} руб.</td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="text-right">
+        <a class="btn btn-primary" href="{% url "shop:product_list" %}" class="button light">Вернуться к каталогу</a>
+        <a href="{% url 'orders:order_create' %}" class="btn btn-success">Оформить заказ</a>
+    </p>
+</div>
+{% else %}
+<section class="fdb-block">
+    <center>
+    <div class="about__body">
+      <div class="alert alert-danger">
+   Для начала Вам нужно войти в аккаунт!
+</div>
+    </div>
+        </center>
+ <div class="otstyp">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col col-md-8 text-center">
+
+            <center>
+            <div class="arrow-down">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+                <br>
+                <br>
+                <a href="{% url 'login' %}"><button class="cnopka" title="Нажмите для просмотра">Войти</button></a>
+            </center>
+        </div>
+      </div>
+    </div>
+        </div>
+ </section>
+{% endif %}
+{% endblock %}

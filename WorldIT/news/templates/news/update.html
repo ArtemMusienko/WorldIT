@@ -1,0 +1,63 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Форма для изменения публикации{% endblock %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+    <div class="features">
+          <div class="about">
+    <div class="about__body">
+        <div class="about__header">
+            <div class="abouttitle">Изменение новости</div>
+       </div>
+    </div>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.title }}<br>
+            {{ form.anons }}<br>
+            {{ form.full_text }}<br>
+            {{ form.date }}<br>
+            <span>{{ error }}</span>
+            <button class="cnopka">Изменить</button>
+                        <br>
+            <br>
+                     <div class="text-center">
+						<a class="txt2" href="{% url 'news_home' %}">
+							Вернуться
+						</a>
+					</div>
+        </form>
+    </div>
+{% else %}
+ <section class="fdb-block">
+    <center>
+    <div class="about__body">
+      <div class="alert alert-danger">
+    Вы не можете изменить вакансию, так как вы не администратор!
+</div>
+    </div>
+        </center>
+ <div class="otstyp">
+    <div class="container">
+        <center><img class="rounded-circle" src="/static/main/img/error.png" width="250px"></center>
+      <div class="row justify-content-center">
+        <div class="col col-md-8 text-center">
+
+            <center>
+            <div class="arrow-down">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+                <br>
+                <br>
+                <a href="/"><button class="cnopka" title="Нажмите для просмотра">Главная</button></a>
+            </center>
+        </div>
+      </div>
+    </div>
+        </div>
+ </section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Сотрудничество | WorldIT{% endblock %}
+
+{% block content %}
+-
+            <div class="about">
+    <div class="about__body">
+        <div class="about__header">
+            <div class="abouttitle">Сотрудничество</div>
+       </div>
+    </div>
+        </div>
+        <section class="ctaaa mb-5">
+    <div class="container text-center">
+        <h3>Напишите нам</h3>
+       <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque eligendi, esse et eum itaque laborum quibusdam quisquam quos sed sunt?</p> -->
+        <br>
+        <a title="Для связи нужен Telegram" href="https://t.me/+Q6ABLh_skXQ2MDIy" class="cta-btn">Свяжитесь с нами 📞</a>
+    </div>
+</section>
+        <div class="content">
+    <div class="content__container">
+            Мы работаем с многими компаниями, предоставляя свою программную продукцию. Мы обеспечиваем серверную и
+            системную поддержку вашей продукции. Если и вы хотите стать нашими партнерами, то обратитесь к форме, отправив Ваше предложение к нам на почту.
+            В данной форме вы сможете выбрать такие разделы, как реклама, партнерство и прочее.
+            Мы обязательно рассмотрим любой Ваш вариант сотрудничества и ответим в ближайшие сроки!
+            В число наших партнеров входят следующие компании:
+</div>
+            </div>
+<br>
+        <ul class="partners-list">
+        <li class="partners-list__item"><img src="https://248006.selcdn.ru/MainSite/partners/tinkoff-black.svg" alt=""></li>
+        <li class="partners-list__item"><img src="https://248006.selcdn.ru/MainSite/partners/aic-black.svg" alt=""></li>
+        <li class="partners-list__item"><img src="https://248006.selcdn.ru/MainSite/partners/vkontakte-black.svg" alt=""></li>
+        <li class="partners-list__item"><img src="https://248006.selcdn.ru/MainSite/partners/yula-black.svg" alt=""></li>
+        <li class="partners-list__item"><img src="https://248006.selcdn.ru/MainSite/partners/qsoft-black.svg" alt=""></li>
+        <li class="partners-list__item"><img src="https://248006.selcdn.ru/MainSite/partners/possible-black.svg" alt=""></li>
+        <li class="partners-list__item"><img src="https://248006.selcdn.ru/MainSite/partners/mailru-black.svg" alt=""></li>
+        <li class="partners-list__item"><img src="https://248006.selcdn.ru/MainSite/partners/deliveryclub-black.svg" alt=""></li>
+        <li class="partners-list__item"><img src="https://248006.selcdn.ru/MainSite/partners/alphabank-black.svg" alt=""></li>
+        <li class="partners-list__item"><img src="https://248006.selcdn.ru/MainSite/partners/rambler-black.svg" alt=""></li>
+        <li class="partners-list__item"><img src="https://248006.selcdn.ru/MainSite/partners/wildberries-black.svg" alt=""></li>
+        <li class="partners-list__item"><img src="https://248006.selcdn.ru/MainSite/partners/red_mad_robot-black.svg" width="270"></li>
+            </ul>
+
+<section class="fdb-block" style="background-image: url(static/main/img/bg_0.svg)">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="fdb-box fdb-touch">
+            <div class="row text-center justify-content-center">
+              <div class="col-12 col-md-9 col-lg-7">
+                <h1>Хотите с нами сотрудничать?</h1>
+                <p class="text-h3">Оставьте нам Вашу заявку или о рекламе, или о партнерстве, или о подобных темах. В ближайшее время мы свяжемся с Вами и дадим ответ на Ваше предложение</p>
+              </div>
+            </div>
+
+            <div class="row justify-content-center pt-4">
+              <div class="col-12 col-md-8">
+                <form method="post">
+                    {% csrf_token %}
+                  <div class="row">
+                    <div class="col-12 col-md">
+                      <input type="text" class="field" placeholder="ФИО" name="name">
+                    </div>
+                    <div class="col-12 col-md mt-4 mt-md-0">
+                        <input type="tel" class="field"  placeholder="Номер телефона" name="number">
+                    </div>
+                  </div>
+
+                  <div class="row mt-4">
+                    <div class="col">
+                         <select type="text" title="Нажми на меня" class="field" placeholder="Тема" name="tema">
+                            <option>Реклама</option>
+                            <option>Партнерство</option>
+                            <option>Прочее</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row mt-4">
+                    <div class="col">
+                      <textarea class="field" name="message" rows="3" placeholder="Ваше предложение" name="message"></textarea>
+                    </div>
+                  </div>
+                    <br>
+                    <center>
+                    {{ form.captcha }}
+                        </center>
+                  <div class="row mt-4">
+                    <div class="col text-center">
+                          <center>
+        {% if request.user.is_authenticated %}
+    <button class="cnopka" title="Проверьте все ли заполнено" type="submit">Отправить</button>
+        <br>
+         <br>
+        {% else %}
+<button class="cnopka" type="button"data-toggle="popover" title="Подсказка" data-content="Для начала нужно войти в свой аккаунт">Отправить</a></button>
+        <br>
+        <br>
+    </center>
+    {% endif %}
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!--
+<div class="about__body">
+        <div class="about__header">
+            <div class="abouttitle">Хотите с нами сотрудничать?</div>
+       </div>
+    </div>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+        <center>
+        {% if request.user.is_authenticated %}
+    <button title="Проверьте все ли заполнено" type="submit">Отправить</button>
+        <br>
+         <br>
+        {% else %}
+<button type="button"data-toggle="popover" title="Подсказка" data-content="Для начала нужно войти в свой аккаунт">Отправить</a></button>
+        <br>
+        <br>
+    </center>
+    {% endif %}
+</form>
+-->
+{% endblock %}
